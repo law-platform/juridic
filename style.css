@@ -211,6 +211,101 @@ mark { background: #fef08a; color: inherit; padding: 0 1px; border-radius: 2px; 
 .doc-entry { content-visibility: auto; contain-intrinsic-size: auto 160px; scroll-margin-top: 16px; }
 .doc-entry:target { outline: 3px solid #eda100; outline-offset: 2px; }
 
+/* ── 訳語比較ページ（docs/compare.html） ── */
+.intro-links { margin: 12px 0 0; font-size: 0.875rem; }
+.intro-links a, .cmp-table a { color: var(--accent); text-decoration: none; }
+.intro-links a:hover, .cmp-table a:hover { text-decoration: underline; }
+
+.cmp-stats { font-size: 1rem; }
+.cmp-stats th { font-size: 0.875rem; }
+.cmp-stats td:first-child { white-space: nowrap; }
+.cmp-stats .cmp-total td { font-weight: 500; color: var(--ink); border-bottom: none; }
+
+.cmp-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-bottom: 12px;
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+.cmp-filter select, .cmp-filter input {
+  font: inherit;
+  color: var(--ink);
+  padding: 4px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  max-width: 100%;
+}
+.cmp-filter input { width: 10em; }
+.cmp-count { margin-left: auto; font-variant-numeric: tabular-nums; }
+
+/* 列幅は中身によらず、フランス語の列のほかは辞書ごとに等分する */
+.cmp-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  font-size: 1.0625rem;
+}
+.cmp-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #f3f4f6;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.cmp-year { font-weight: 400; }
+.cmp-table tbody th, .cmp-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  text-align: left;
+}
+.cmp-table thead th:first-child { width: 22%; }
+.cmp-table tbody th { font-weight: 400; }
+.cmp-words li { overflow-wrap: anywhere; }
+.cmp-fr { display: block; font-weight: 700; color: var(--ink); word-break: break-word; }
+.cmp-status { display: block; margin-top: 2px; font-size: 0.8125rem; }
+.cmp-all { color: #15803d; }
+.cmp-some { color: #b45309; }
+.cmp-none { color: #b91c1c; }
+.cmp-empty { color: #9ca3af; }
+
+.cmp-words { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.cmp-words li, .cmp-key {
+  padding: 1px 8px;
+  border-left: 3px solid;
+  border-radius: 3px;
+}
+.cmp-key { display: inline-block; margin: 0 2px; padding: 0 6px; line-height: 1.5; }
+.cmp-words .match, .cmp-key.match { background: #f0fdf4; border-color: #16a34a; }
+.cmp-words .diff, .cmp-key.diff { background: #fffbeb; border-color: #d97706; }
+
+/* 狭い画面では1行を1枚のカードにし、セルの前に辞書名を出す */
+@media (max-width: 640px) {
+  .cmp-table, .cmp-table tbody, .cmp-table tr, .cmp-table tbody th, .cmp-table td { display: block; width: auto; }
+  .cmp-table thead { display: none; }
+  .cmp-table tr { border-bottom: 1px solid var(--border); padding: 4px 0; }
+  .cmp-table tbody th, .cmp-table td { border-bottom: none; padding: 4px 12px; }
+  .cmp-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+  .cmp-count { margin-left: 0; }
+}
+
 /* ── 法律情報基盤（law-platform.jp）と同じヘッダー・フッター ── */
 .lp-header { background-color: #002060; }
 .lp-header-inner {

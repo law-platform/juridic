@@ -16,6 +16,7 @@ index.html / app.js / style.css   画面と検索ロジック
 data/entries.json                 見出し・読み・対訳・出典（最初に読み込む）
 data/defs.json                    語釈本文（見出しの後に読み込む）
 docs/<書誌ID>.html                辞書ごとの全項目一覧（トップの収録辞書の表からリンク）
+docs/compare.html                 訳語比較（2つ以上の辞書に現れるフランス語ごとに各辞書の訳語を並べる）
 ```
 
 `data/` の2ファイルと `docs/` の一覧ページは、このリポジトリの外にある変換プログラム
