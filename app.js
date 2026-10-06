@@ -8,7 +8,7 @@ const KWIC_MAX = 3;
 const LANG_LABEL = { ja: '日', fr: '仏', en: '英', de: '独', la: '羅' };
 const POS_LABEL = {
   noun: '名詞', verb: '動詞', adjective: '形容詞', adverb: '副詞',
-  multiWordExpression: '成句', masculineNoun: '男性名詞', feminineNoun: '女性名詞',
+  multiWordExpression: '熟語', masculineNoun: '男性名詞', feminineNoun: '女性名詞',
 };
 
 const $ = (id) => document.getElementById(id);
@@ -479,7 +479,7 @@ function buildDictUi() {
     `<label><input type="checkbox" value="${i}" checked> ${dictLabel(d)}</label>`).join('');
   $('dict-list').innerHTML = state.dicts.map((d) =>
     `<tr><td class="muted-cell">${d.year}</td>`
-    + `<td><a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.title)}</a></td>`
+    + `<td><a href="docs/${encodeURIComponent(d.id)}.html">${esc(d.title)}</a></td>`
     + `<td class="muted-cell">${esc(d.dir)}</td>`
     + `<td class="muted-cell">${esc(d.status || '')}</td>`
     + `<td class="num-cell">${d.count.toLocaleString()}</td></tr>`).join('');

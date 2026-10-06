@@ -180,6 +180,37 @@ mark { background: #fef08a; color: inherit; padding: 0 1px; border-radius: 2px; 
 }
 #more:hover { background: #f3f4f6; }
 
+/* ── 辞書ごとの一覧ページ（docs/*.html）。項目カードは検索結果と共通 ── */
+.doc-back { margin: 0 0 8px; font-size: 0.875rem; }
+.doc-back a, .doc-source, .doc-toc a { color: var(--accent); text-decoration: none; }
+.doc-back a:hover, .doc-source:hover, .toc-part a:hover { text-decoration: underline; }
+
+.doc-toc {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+.doc-toc summary { cursor: pointer; padding: 12px 16px; font-weight: 500; }
+.toc-body { padding: 0 16px 14px; }
+.toc-part { margin: 10px 0 6px; font-size: 0.8125rem; color: var(--muted); }
+.toc-part:first-child { margin-top: 0; }
+.toc-grid { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.toc-grid a {
+  display: inline-block;
+  min-width: 2.25em;
+  padding: 2px 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-align: center;
+}
+.toc-grid a:hover { background: var(--accent-soft); }
+
+/* 数千件のカードを並べるので、画面外のカードは描画を省く */
+.doc-entry { content-visibility: auto; contain-intrinsic-size: auto 160px; scroll-margin-top: 16px; }
+.doc-entry:target { outline: 3px solid #eda100; outline-offset: 2px; }
+
 /* ── 法律情報基盤（law-platform.jp）と同じヘッダー・フッター ── */
 .lp-header { background-color: #002060; }
 .lp-header-inner {
