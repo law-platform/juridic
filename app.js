@@ -335,20 +335,24 @@ function renderEntry(e, { focus = false } = {}) {
   if (e.r) parts.push(`<span class="reading">（${e.r.map(hl).join('・')}）</span>`);
   parts.push('</div>');
 
+  // 対訳は見出しの下に置く。原本で語釈の末尾にある辞書（transAfter）は語釈の後ろに置く
+  const trans = [];
   if (e.t) {
     const byLang = new Map();
     for (const [lang, s] of e.t) {
       if (!byLang.has(lang)) byLang.set(lang, []);
       byLang.get(lang).push(s);
     }
-    parts.push('<dl class="trans">');
+    trans.push('<dl class="trans">');
     for (const [lang, list] of byLang) {
-      parts.push(`<div><dt>${esc(LANG_LABEL[lang] || lang)}</dt><dd lang="${esc(lang)}">${list.map(hl).join('、')}</dd></div>`);
+      trans.push(`<div><dt>${esc(LANG_LABEL[lang] || lang)}</dt><dd lang="${esc(lang)}">${list.map(hl).join('、')}</dd></div>`);
     }
-    parts.push('</dl>');
+    trans.push('</dl>');
   }
 
+  if (!d.transAfter) parts.push(...trans);
   if (e.df) parts.push(`<div class="def" data-id="${esc(e.id)}">${renderDef(e, focus)}</div>`);
+  if (d.transAfter) parts.push(...trans);
 
   if (e.rel) {
     const links = e.rel
