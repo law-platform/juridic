@@ -1,0 +1,223 @@
+/* 色・アニメーション・一覧表は司法省日誌（shiho-nisshi.github.io/style.css）と同じ */
+:root {
+  --accent:      #2563eb;
+  --accent-soft: #eff6ff;
+  --border:      #e5e7eb;
+  --muted:       #4b5563;
+  --card-bg:     #ffffff;
+  --ink:         #111827;
+  --shadow:      0 1px 2px rgba(0,0,0,0.05);
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-down { animation: fadeDown 0.4s ease-out; }
+
+/* Tailwind の preflight（a { color: inherit }）より後に効くよう、範囲を絞って指定する */
+.browse-table a, .entry a { color: var(--accent); text-decoration: none; }
+.browse-table a:hover, .entry a:hover { text-decoration: underline; }
+
+/* ── 収録辞書の一覧表 ── */
+.browse-table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+.browse-table .col-year { width: 64px; }
+.browse-table .col-dir { width: 104px; }
+.browse-table .col-status { width: 84px; }
+.browse-table .col-count { width: 72px; text-align: right; }
+.browse-table th {
+  text-align: left;
+  font-size: 0.8125rem;
+  color: var(--muted);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.browse-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+.browse-table .num-cell { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+.browse-table .muted-cell { color: var(--muted); }
+
+/* ── 検索欄 ── */
+.search-panel {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+.search-row { display: flex; gap: 8px; }
+#q {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 1rem;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+}
+#q:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
+#q::-webkit-search-cancel-button { display: none; }
+#clear {
+  font: inherit;
+  width: 44px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--muted);
+  cursor: pointer;
+}
+#clear:hover { background: #f3f4f6; }
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin-top: 12px;
+  font-size: 0.875rem;
+}
+.options label { cursor: pointer; white-space: nowrap; }
+.options input { accent-color: var(--accent); }
+.mode, .dicts { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.dicts { flex-basis: 100%; color: var(--muted); }
+.hint { margin: 10px 0 0; font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
+
+#status.error { color: #b91c1c; }
+
+/* ── 検索結果カード（司法省日誌の巻ページの記事カードと同じ作り） ── */
+.entry {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.entry.focus { outline: 3px solid #eda100; outline-offset: 2px; }
+
+.entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--border);
+}
+.badge {
+  display: inline-block;
+  padding: 0 8px;
+  border-radius: 9999px;
+  border: 1px solid #d1d5db;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  color: #374151;
+  white-space: nowrap;
+}
+.entry a.badge-solid {
+  border-color: #1f2937;
+  background: #1f2937;
+  color: #fff;
+}
+.entry a.badge-solid:hover { background: #374151; text-decoration: none; }
+.entry-meta .source { margin-left: auto; font-size: 0.75rem; }
+
+.hw-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.hw { margin: 0; font-size: 1.125rem; font-weight: 700; color: var(--ink); }
+.col, .reading { color: var(--muted); font-size: 0.9375rem; }
+
+.trans { margin: 6px 0 0; font-size: 0.9375rem; }
+.trans div { display: flex; gap: 8px; }
+.trans dt { flex: none; color: var(--muted); font-size: 0.8125rem; width: 1.5em; padding-top: 1px; }
+.trans dd { margin: 0; }
+
+.def {
+  margin-top: 8px;
+  font-size: 1rem;
+  line-height: 1.9;
+  color: var(--ink);
+  white-space: pre-line;
+  word-break: break-all;
+}
+.def .kwic { display: block; margin: 2px 0; }
+.def .kwic::before { content: "… "; color: var(--muted); }
+.def .kwic::after { content: " …"; color: var(--muted); }
+.def .note { font-size: 0.8125rem; color: var(--muted); }
+.toggle {
+  font: inherit;
+  font-size: 0.8125rem;
+  color: var(--accent);
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 6px;
+  cursor: pointer;
+}
+.toggle:hover { text-decoration: underline; }
+
+.rel {
+  margin-top: 10px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border);
+  font-size: 0.875rem;
+}
+.rel-caption { color: #6b7280; }
+.rel a { margin-right: 10px; }
+
+mark { background: #fef08a; color: inherit; padding: 0 1px; border-radius: 2px; }
+
+.more-wrap { text-align: center; margin: 16px 0; }
+#more {
+  font: inherit;
+  font-size: 0.875rem;
+  padding: 8px 24px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+#more:hover { background: #f3f4f6; }
+
+/* ── 法律情報基盤（law-platform.jp）と同じヘッダー・フッター ── */
+.lp-header { background-color: #002060; }
+.lp-header-inner {
+  display: flex;
+  align-items: stretch;
+  max-width: 1024px;
+  min-height: 3.25rem;
+  margin: 0 auto;
+}
+.lp-header .title-box { padding: 0.5rem 1rem 0 0.5rem; }
+.lp-header .lp-title,
+.lp-header .lp-subtitle { display: inline-block; margin: 0; line-height: 1; }
+.lp-header .lp-title { font-size: 2rem; font-weight: 600; }
+.lp-header .lp-title a { font-family: "HG教科書体"; font-weight: normal; }
+.lp-header .lp-subtitle {
+  font-size: 1.25rem;
+  font-weight: 400;
+  font-family: "Times New Roman";
+  font-style: italic;
+  margin-left: 1em;
+}
+.lp-header .lp-title a,
+.lp-header .lp-subtitle a { color: white; text-decoration: none; }
+
+.lp-footer {
+  margin-top: 3rem;
+  padding: 10px;
+  background-color: #fafafa;
+  color: #4a4a4a;
+  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+}
+.lp-footer-inner { max-width: 960px; margin: 0 auto; }
+.lp-footer p { margin: 0; }
+.lp-footer p:not(:last-child) { margin-bottom: 1em; }
+.lp-footer a { color: #485fc7; text-decoration: none; }
+.lp-footer a:hover { color: #363636; }
+.lp-footer img { display: inline; height: auto; max-width: 100%; vertical-align: baseline; }

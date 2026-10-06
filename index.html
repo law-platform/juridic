@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: { fontFamily: { sans: ['"Noto Sans JP"', 'ui-sans-serif', 'system-ui', 'sans-serif'] } } } }
+</script>
+<title>明治法律辞書検索</title>
+<meta name="description" content="明治期の法律辞書・法律辞典（佛和法律字彙・民法應用字解・法律大辭典）の見出し語・語釈を横断検索する">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen font-sans">
+
+<header class="lp-header">
+  <div class="lp-header-inner">
+    <div class="title-box"><h1 class="lp-title"><a href="https://law-platform.jp/">法律情報基盤</a></h1><h2 class="lp-subtitle"><a href="https://law-platform.jp/"> - Legal Information Platform - </a></h2></div>
+  </div>
+</header>
+
+<div class="max-w-3xl mx-auto px-4 pt-8">
+
+  <div class="mb-6 fade-down">
+    <h1 class="text-2xl font-bold text-gray-900 tracking-wide"><a href="./">明治法律辞書検索</a></h1>
+    <p class="mt-2 text-sm text-gray-500">
+      明治期の法律辞書・法律辞典の見出し語・対訳語・語釈を横断して検索できるサイト。
+    </p>
+  </div>
+
+  <section class="search-panel" aria-label="検索">
+    <div class="search-row">
+      <input id="q" type="search" autocomplete="off" aria-label="検索語">
+      <button id="clear" type="button" title="クリア" aria-label="クリア">×</button>
+    </div>
+
+    <div class="options">
+      <div class="mode" role="radiogroup" aria-label="検索対象">
+        <label><input type="radio" name="mode" value="head" checked> 見出し語・対訳語</label>
+        <label><input type="radio" name="mode" value="full"> 語釈を含む全文</label>
+      </div>
+      <div class="dicts" id="dict-filter" aria-label="辞書の絞り込み"></div>
+    </div>
+    <p class="hint">複数語は空白区切りで AND 検索。旧字・新字（權／権）、カタカナ・ひらがな、大文字・小文字、仏独語のアクセント記号の違いは区別しません。欧文の語は一、二文字違いの綴りも検索します。</p>
+  </section>
+
+  <p id="status" class="mt-6 mb-4 text-sm text-gray-500">データを読み込み中…</p>
+
+  <section id="intro">
+    <table class="browse-table">
+      <thead>
+        <tr><th class="col-year">刊年</th><th>書名</th><th class="col-dir">対訳</th><th class="col-status">校正</th><th class="col-count">項目数</th></tr>
+      </thead>
+      <tbody id="dict-list"></tbody>
+    </table>
+  </section>
+
+  <section id="results" aria-live="polite"></section>
+  <div id="more-wrap" class="more-wrap" hidden><button id="more" type="button"></button></div>
+
+</div>
+
+<footer class="lp-footer">
+  <div class="lp-footer-inner">
+    <p><a href="https://law-platform.jp/terms">サイトポリシー</a></p>
+    <p>Copyright &copy;<a href="https://researchmap.jp/30419428" rel="noopener noreferrer" target="_blank"> SANO Tomoya</a></p>
+    <div>
+      <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener noreferrer" target="_blank"><img alt="CC BY 4.0" class="cc-logo" src="https://licensebuttons.net/l/by/4.0/88x31.png" /></a>
+      <p>本データベースは、<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener noreferrer" target="_blank">クリエイティブ・コモンズ 表示 4.0 ライセンス</a>のもとで利用できます。</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/minisearch@7.1.2/dist/umd/index.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
