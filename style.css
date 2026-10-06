@@ -212,7 +212,9 @@ mark { background: #fef08a; color: inherit; padding: 0 1px; border-radius: 2px; 
 .doc-entry:target { outline: 3px solid #eda100; outline-offset: 2px; }
 
 /* ── 訳語比較ページ（docs/compare.html） ── */
-.intro-links { margin: 12px 0 0; font-size: 0.875rem; }
+.intro-links { margin: 16px 0 0; font-size: 0.9375rem; }
+.intro-links p { margin: 0 0 4px; color: var(--muted); }
+.intro-links ul { margin: 0; padding: 0 0 0 1em; list-style: none; line-height: 1.8; }
 .intro-links a, .cmp-table a { color: var(--accent); text-decoration: none; }
 .intro-links a:hover, .cmp-table a:hover { text-decoration: underline; }
 
@@ -273,7 +275,8 @@ mark { background: #fef08a; color: inherit; padding: 0 1px; border-radius: 2px; 
 .cmp-table thead th:first-child { width: 22%; }
 .cmp-table tbody th { font-weight: 400; }
 .cmp-words li { overflow-wrap: anywhere; }
-.cmp-fr { display: block; font-weight: 700; color: var(--ink); word-break: break-word; }
+.cmp-key-word { display: block; font-weight: 700; color: var(--ink); word-break: break-word; }
+.cmp-reading { display: block; font-size: 0.8125rem; color: var(--muted); }
 .cmp-status { display: block; margin-top: 2px; font-size: 0.8125rem; }
 .cmp-all { color: #15803d; }
 .cmp-some { color: #b45309; }
@@ -289,6 +292,36 @@ mark { background: #fef08a; color: inherit; padding: 0 1px; border-radius: 2px; 
 .cmp-key { display: inline-block; margin: 0 2px; padding: 0 6px; line-height: 1.5; }
 .cmp-words .match, .cmp-key.match { background: #f0fdf4; border-color: #16a34a; }
 .cmp-words .diff, .cmp-key.diff { background: #fffbeb; border-color: #d97706; }
+/* 同じ訳語の別の項目（2つ目以降）へのリンク */
+.cmp-also { font-size: 0.75rem; margin-left: 3px; }
+
+/* 日本語からの比較：1項目が1行。仏語を色分けし、英語・独語は下に灰色で添える */
+.cmp-foreign li { border-left: none; padding: 0; }
+.cmp-foreign .match, .cmp-foreign .diff {
+  display: inline-block;
+  margin-right: 4px;
+  padding: 1px 8px;
+  border-left: 3px solid;
+  border-radius: 3px;
+}
+.cmp-others { display: block; margin: 2px 0 0 4px; font-size: 0.875rem; color: #6b7280; }
+.cmp-lang { font-size: 0.75rem; }
+
+.cmp-tabs { display: flex; gap: 4px; margin-top: 14px; border-bottom: 1px solid var(--border); }
+.cmp-tabs a {
+  margin-bottom: -1px;
+  padding: 6px 14px;
+  font-size: 0.9375rem;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+}
+.cmp-tabs a:hover { text-decoration: underline; }
+.cmp-tabs a[aria-current] { color: var(--ink); font-weight: 500; background: var(--card-bg); border-color: var(--border); }
+.cmp-tabs a[aria-current]:hover { text-decoration: none; }
+.cmp-note { margin: 8px 0 0; font-size: 0.8125rem; color: var(--muted); line-height: 1.6; }
 
 /* 狭い画面では1行を1枚のカードにし、セルの前に辞書名を出す */
 @media (max-width: 640px) {
