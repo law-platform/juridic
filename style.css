@@ -68,6 +68,18 @@
   cursor: pointer;
 }
 #clear:hover { background: #f3f4f6; }
+/* 検索ボタン（SCAPIN-DB の Search ボタンと同じ） */
+#go {
+  font: inherit;
+  flex: none;
+  padding: 0 24px;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#go:hover { background: #1d4ed8; }
 
 .options {
   display: flex;

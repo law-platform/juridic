@@ -489,20 +489,12 @@ function buildDictUi() {
     + `<td class="num-cell">${d.count.toLocaleString()}</td></tr>`).join('');
 }
 
-function debounce(fn, ms) {
-  let timer;
-  return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => fn(...args), ms);
-  };
-}
-
 function bindEvents() {
-  const debounced = debounce(() => runSearch(), 300);
-  $('q').addEventListener('input', debounced);
+  // 入力中は検索せず、Enter・検索ボタンで検索する
   $('q').addEventListener('keydown', (ev) => {
     if (ev.key === 'Enter') runSearch({ push: true });
   });
+  $('go').addEventListener('click', () => runSearch({ push: true }));
   $('clear').addEventListener('click', () => {
     $('q').value = '';
     runSearch({ push: true });
