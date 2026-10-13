@@ -196,6 +196,17 @@ mark { background: #fef08a; color: inherit; padding: 0 1px; border-radius: 2px; 
 .doc-back { margin: 0 0 8px; font-size: 0.875rem; }
 .doc-back a, .doc-source, .doc-toc a { color: var(--accent); text-decoration: none; }
 .doc-back a:hover, .doc-source:hover, .toc-part a:hover { text-decoration: underline; }
+/* 上端の「← 明治法律辞書検索」は、スクロールしても画面の上端に残す（帯の背景・下線は画面の幅いっぱいに出す） */
+.doc-back-top {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  margin: 0 0 8px;
+  padding: 8px 0;
+  background: #f9fafb;
+  box-shadow: 0 0 0 100vmax #f9fafb, 0 1px 0 100vmax #e5e7eb;
+  clip-path: inset(0 -100vmax -1px -100vmax);
+}
 
 .doc-toc {
   background: var(--card-bg);
@@ -220,7 +231,7 @@ mark { background: #fef08a; color: inherit; padding: 0 1px; border-radius: 2px; 
 .toc-grid a:hover { background: var(--accent-soft); }
 
 /* 数千件のカードを並べるので、画面外のカードは描画を省く */
-.doc-entry { content-visibility: auto; contain-intrinsic-size: auto 160px; scroll-margin-top: 16px; }
+.doc-entry { content-visibility: auto; contain-intrinsic-size: auto 160px; scroll-margin-top: 48px; }  /* 上端に固定した「← 明治法律辞書検索」に隠れないように */
 .doc-entry:target { outline: 3px solid #eda100; outline-offset: 2px; }
 
 /* ── 訳語比較ページ（docs/compare.html） ── */
