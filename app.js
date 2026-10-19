@@ -261,7 +261,15 @@ function countOf(text, t, cap) {
 
 let searchSeq = 0;
 
-async function runSearch({ push = false } = {}) {
+// Google アナリティクスに検索語と件数を送る（Enter・検索ボタンでの検索だけ。URL から開き直したとき・戻ったときと、直前と同じ語は送らない）
+let lastSent = '';
+function sendSearch(q, count) {
+  if (q === lastSent || typeof gtag !== 'function') return;
+  lastSent = q;
+  gtag('event', 'search', { search_term: q.slice(0, 100), result_count: String(count) });
+}
+
+async function runSearch({ push = false, send = false } = {}) {
   const opt = getOptions();
   const seq = ++searchSeq;
   state.mode = opt.mode;
@@ -293,6 +301,7 @@ async function runSearch({ push = false } = {}) {
   } else {
     state.results = searchHead(opt, terms);
   }
+  if (send) sendSearch(opt.q, state.results.length);
 
   state.shown = 0;
   $('results').innerHTML = '';
@@ -492,9 +501,9 @@ function buildDictUi() {
 function bindEvents() {
   // 入力中は検索せず、Enter・検索ボタンで検索する
   $('q').addEventListener('keydown', (ev) => {
-    if (ev.key === 'Enter') runSearch({ push: true });
+    if (ev.key === 'Enter') runSearch({ push: true, send: true });
   });
-  $('go').addEventListener('click', () => runSearch({ push: true }));
+  $('go').addEventListener('click', () => runSearch({ push: true, send: true }));
   $('clear').addEventListener('click', () => {
     $('q').value = '';
     runSearch({ push: true });

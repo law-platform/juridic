@@ -265,6 +265,16 @@ mark { background: #fef08a; color: inherit; padding: 0 1px; border-radius: 2px; 
   max-width: 100%;
 }
 .cmp-filter input { width: 10em; }
+.cmp-filter button {
+  font: inherit;
+  color: #fff;
+  padding: 4px 12px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  cursor: pointer;
+}
+.cmp-filter button:hover { background: #1d4ed8; }
 .cmp-count { margin-left: auto; font-variant-numeric: tabular-nums; }
 
 /* 列幅は中身によらず、フランス語の列のほかは辞書ごとに等分する */
